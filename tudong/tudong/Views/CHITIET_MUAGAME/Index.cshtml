@@ -1,0 +1,95 @@
+﻿@model IEnumerable<tudong.Models.CHITIET_MUAGAME>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<style>
+    .invoice-container {
+        border: 1px solid #ccc;
+        padding: 10px;
+        margin-bottom: 10px;
+    }
+
+    .invoice-details {
+        background-color:cadetblue;
+        border: 1px solid #ccc;
+        padding: 10px;
+        margin-bottom: 10px;
+        
+    }
+
+        .invoice-details div {
+            margin-bottom: 5px;
+            display:inline-block;
+        }
+
+        .invoice-details strong {
+            color:crimson;
+        }
+
+    .product-details {
+        background-color: #f1f1f1;
+        border: 1px solid #ccc;
+        padding: 10px;
+        margin-bottom: 10px;
+        display: inline-block;
+    }
+
+        .product-details .product-image {
+            margin-right: 10px;
+        }
+
+        .product-details strong {
+            color: #333;
+        }
+
+    
+</style>
+<h2>Danh sách hóa đơn</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+   
+    @for (int i = 1; i < tudong.Models.PLV.ListMuaGame.Count(); i++)
+    {
+        <div class="invoice-container">
+            <div class="invoice-details">
+                <div>
+                    <strong>ID Hóa đơn:</strong> @tudong.Models.PLV.ListMuaGame[i]
+                </div>
+                <div>
+                    <strong>ID Người dùng:</strong> @tudong.Models.PLV.Id
+                </div>
+                <div>
+                    <strong>Ngày tạo:</strong> @tudong.Models.PLV.ListNgayMua[i]
+                </div>
+            </div>
+            @foreach (var item in Model)
+            {
+                if (item.idMua == tudong.Models.PLV.ListMuaGame[i])
+                {
+                    <div class="product-details">
+                        <div class="product-image">
+                            <img src="~/Images/@Html.DisplayFor(modelItem => item.GAME.image_url)" alt="Product 1" style="width: 50px; height: 50px;">
+                        </div>
+                        <div>
+                            <strong>ID Trò chơi:</strong> @Html.DisplayFor(modelItem => item.idGame)
+                        </div>
+                       
+                        <div>
+                            <strong>Đơn giá:</strong> @Html.DisplayFor(modelItem => item.gia)
+                        </div>
+                    </div>}
+
+
+            }
+        </div>
+            <div>
+
+            </div>
+    }
+
+</table>

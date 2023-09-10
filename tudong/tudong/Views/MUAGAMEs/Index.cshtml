@@ -1,0 +1,73 @@
+﻿@model IEnumerable<tudong.Models.MUAGAME>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    var grid = new WebGrid(Model, canPage: true, defaultSort: "TenSV", rowsPerPage: 5);
+}
+<style>
+    .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 10px;
+        margin-bottom:10px;
+    }
+
+        .container input[type="text"] {
+            width: 700px;
+            height: 40px;
+            padding: 5px;
+            font-size: 16px;
+        }
+
+        .container input[type="submit"] {
+            width: 150px;
+            height: 40px;
+            font-size: 16px;
+            background-color: darkslategrey;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+</style>
+<h2>Index</h2>
+@using (Html.BeginForm())
+{
+    <div class="container">
+        <input type="text" name="maHD" placeholder="nhập mã hoá đơn" />
+        <input type="submit" value="Tìm kiếm" />
+    </div>
+}
+<div id="gridContent" style="text-align:center">
+    @ViewBag.TB
+    @grid.GetHtml(
+        tableStyle: "table table-bordered table-hover grid-table",
+        footerStyle: "grid-footer",
+        fillEmptyRows: true,
+        mode: WebGridPagerModes.Numeric,
+        alternatingRowStyle: "alternatingRowStyle",
+          columns: new[]  // colums in grid
+         {
+    grid.Column("STT",format: item => item.WebGrid.Rows.IndexOf(item) + 1 + Math.Round(Convert.ToDouble(grid.TotalRowCount / grid.PageCount) / grid.RowsPerPage) * grid.RowsPerPage * grid.PageIndex),
+    grid.Column("idMua","Id Hoá Đơn"), //the model fields to display
+    grid.Column("idND","Id người dùng"  ),
+    grid.Column("Deleted","Trạng thái",format: (@item) => @item.Deleted==true?"Duyệt":"Chưa duyệt"),
+    grid.Column("trangThai","Mật khẩu"),
+grid.Column("ngayMua","Email"),
+grid.Column("USER.email","FuName"),
+grid.Column("Chức năng", format: @<text>
+    <a href="@Url.Action("Edit",
+                        new { id = item.idMua})" class="edit-btn"><abbr title="Cập nhật dữ liệu"><img src="/images/edit.png" width="20" height="20" /></abbr></a>
+    <a href="@Url.Action("Details",
+                        new { id = item.idMua})" class="edit-btn"><abbr title="Xem chi tiết"><img src="/images/details.png" width="20" height="20" /></abbr></a>
+    <a href="@Url.Action("Delete",
+                        new { id = item.idMua})" class="edit-btn">
+        <abbr title="Xóa dữ liệu">
+            <img src="/images/delete.png" width="20" height="20" />
+        </abbr>
+    </a>
+</text>),
+}
+)
+</div>

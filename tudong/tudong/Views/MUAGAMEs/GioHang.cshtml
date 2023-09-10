@@ -1,0 +1,42 @@
+﻿@model tudong.Models.MUAGAME
+
+@{
+    ViewBag.Title = "GioHang";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>GioHang</h2>
+<p1>
+    idgame 1 @tudong.Models.PLV.ListMaMuaBF[0];
+    idgame 1 @tudong.Models.PLV.ListMaMuaBF[1];
+</p1>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    if (ViewBag.role != "0")
+    {
+
+        <div class="form-horizontal">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            @Html.HiddenFor(model => model.idMua, new { Value = ViewBag.idnd })
+            @Html.HiddenFor(model => model.idND, new { Value = ViewBag.idmoi })
+            @Html.HiddenFor(model => model.trangThai, new { Value = "0" })
+            @Html.HiddenFor(model => model.ngayMua, new { Value = DateTime.Now })
+
+            <form id="paymentForm" method="post" action="Payment">
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Thêm trò chơi vào giỏ" class="btn btn-default" />
+                    </div>
+                </div>
+            </form>
+        </div>
+    }
+    else
+    {
+        <h2>Bạn phải đăng nhập để sử dụng giỏ hàng</h2>
+
+    }
+}

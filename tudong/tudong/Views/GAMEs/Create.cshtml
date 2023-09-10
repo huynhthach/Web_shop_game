@@ -1,0 +1,128 @@
+﻿@model tudong.Models.GAME
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<style>
+    .custom-form {
+        margin: 20px;
+        padding: 20px;
+        background-color: #f0f0f0;
+        border-radius: 5px;
+    }
+
+        .custom-form .form-heading {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .custom-form .form-divider {
+            border: none;
+            border-top: 1px solid #ccc;
+            margin: 10px 0;
+        }
+
+        .custom-form .form-group {
+            margin-bottom: 15px;
+        }
+
+        .custom-form .control-label {
+            font-weight: bold;
+        }
+
+        .custom-form .btn {
+            background-color: #007bff;
+            color: #fff;
+            border-color: #007bff;
+        }
+
+            .custom-form .btn:hover {
+                background-color: #0056b3;
+                border-color: #0056b3;
+            }
+
+</style>
+
+<h2>Thêm một phần mềm mới</h2>
+
+@using (Html.BeginForm("Create", "GAMEs", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+<div class="form-horizontal custom-form">
+    <h4 class="form-heading">GAME</h4>
+    <hr class="form-divider" />
+    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+    @Html.HiddenFor(model => model.idGame, new { Value = ViewBag.idg })
+    @Html.HiddenFor(model => model.ngayTao, new { Value = @DateTime.UtcNow.ToString("dd/MM/yyyy") })
+
+   
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.name, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.name, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.name, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.moTa, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.moTa, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.moTa, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.gia, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.gia, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.gia, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    @Html.HiddenFor(model => model.idNPH, new { Value = tudong.Models.PLV.Id.AsInt() })
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.idTheLoai, "idTheLoai", htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.DropDownList("idTheLoai", null, htmlAttributes: new { @class = "form-control" })
+            @Html.ValidationMessageFor(model => model.idTheLoai, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-10">
+            <div class="avatar-wrapper">
+                <img id="avatar-preview" src="~/Images/avatar.jpg" alt="Avatar Preview" /> <br />
+                <input type="file" style="height:30px;" name="Avatar" accept="image/*" required />
+                @Html.ValidationMessageFor(model => model.image_url, "", new { @class = "text-danger" })
+            </div>
+        </div>
+    </div>
+
+    
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.giamGia, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-10">
+            @Html.EditorFor(model => model.giamGia, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.giamGia, "", new { @class = "text-danger" })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input type="submit" value="Create" class="btn btn-default" />
+        </div>
+    </div>
+</div>
+
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

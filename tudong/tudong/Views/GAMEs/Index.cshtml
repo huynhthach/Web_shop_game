@@ -1,0 +1,300 @@
+﻿@model IEnumerable<tudong.Models.GAME>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    var grid = new WebGrid(Model, canPage: true, defaultSort: "", rowsPerPage: 4);
+    @Scripts.Render("~/Scripts/jquery-1.6.2.min.js")
+}
+<script>
+    function thongBaoDaThem() {
+        alert("Thêm thành công!");
+    }
+</script>
+
+@if (tudong.Models.PLV.role == "2" || tudong.Models.PLV.role == "1")
+{<button class="gamer-button">
+        @Html.ActionLink("Publish Your Game", "Create")
+    </button>
+
+}
+<script>
+    var numberElement = document.getElementById("number");
+    var number = parseFloat(numberElement.textContent);
+
+    var formattedNumber = number.toLocaleString('en-US');
+
+    numberElement.textContent = formattedNumber;
+</script>
+<style>
+    .button-container {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+        font-family:Arial;
+    }
+
+    
+
+        .button-container button {
+            margin: 0 10px;
+            padding: 10px 20px;
+            background-color: #f1f1f1;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 25px;
+            font-weight: bolder; /* Điều chỉnh kích thước chữ */
+        }
+
+            .button-container button:hover {
+                background-color:cadetblue;
+            }
+
+                .button-container button:hover a {
+                    color: aliceblue;
+                }
+
+            .button-container button a {
+                text-decoration: none;
+                color: #333;
+            }
+
+    .gamer-button {
+        background-color: cadetblue;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        font-size: 16px;
+        font-weight: bold;
+        text-transform: uppercase;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        border-radius: 5px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .gridContent image {
+        width: 200px;
+        height: 200px;
+        object-fit: cover;
+    }
+
+    .fixed-image {
+        width: 300px;
+        height: 300px;
+        object-fit: cover;
+    }
+
+    .gamer-button:hover {
+        background-color: lightblue;
+        color: darkblue;
+    }
+
+    .gamer-button:active {
+        background-color: honeydew;
+    }
+
+    .gamer-button p {
+        margin: 0;
+    }
+
+    .gamer-button:focus {
+        outline: none;
+    }
+
+    .gamer-button::after {
+        content: url('path/to/gamer-icon.png');
+        display: inline-block;
+        margin-left: 10px;
+        vertical-align: middle;
+    }
+
+    .gamer-button::before {
+        content: url('path/to/gamer-sound.mp3');
+        display: none;
+    }
+
+    .item-name {
+        color: slategray;
+        font-size: 34px;
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+
+    .item-details {
+        color: #666;
+        font-size: 16px;
+        margin-bottom: 5px;
+    }
+
+    .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 10px;
+    }
+
+        .container input[type="text"] {
+            width: 700px;
+            height: 40px;
+            padding: 5px;
+            font-size: 16px;
+        }
+
+        .container input[type="submit"] {
+            width: 150px;
+            height: 40px;
+            font-size: 16px;
+            background-color: darkslategrey;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+</style>
+@using (Html.BeginForm())
+{
+    <div class="container">
+        <input type="text" name="tenGame" />
+        <input type="submit" value="Tìm kiếm" />
+    </div>
+
+    <div class="button-container">
+        <button>
+            <img src="~/Images/IconDoiKhang.png" />
+            @Html.ActionLink("Đối kháng", "Index", "GAMEs", new { theLoai = "DK" }, new { @class = "a" })
+        </button>
+        <button>
+            <img src="~/Images/IconAdventurer.png" />
+            @Html.ActionLink("Phiêu lưu", "Index", "GAMEs", new { theLoai = "PL" }, new { @class = "a" })
+        </button>
+        <button>
+            <img src="~/Images/IconOpenWorld.png" />
+            @Html.ActionLink("Thế giới mở", "Index", "GAMEs", new { theLoai = "TGM" }, new { @class = "a" })
+        </button>
+        <button>
+            <img src="~/Images/IconHorror.png" />
+            @Html.ActionLink("Kinh dị", "Index", "GAMEs", new { theLoai = "KD" }, new { @class = "a" })
+        </button>
+        <button>
+            <img src="~/Images/IconNhapVai.png" />
+            @Html.ActionLink("Nhập vai", "Index", "GAMEs", new { theLoai = "NV" }, new { @class = "a" })
+        </button>
+    </div>
+    if (ViewBag.tl == "empty")
+    {
+        <div id="gridContent" widht="200px">
+            @grid.GetHtml(
+                          tableStyle: "table table-bordered table-hover",
+                              footerStyle: "grid-footer",
+                              fillEmptyRows: true,
+
+                              mode: WebGridPagerModes.Numeric,
+                              alternatingRowStyle: "alternatingRowStyle",
+                                columns: new[] {
+                            grid.Column("",format:@<text>
+    <a href="@Url.Action("Details",
+                        new { id = item.idGame})" class="edit-btn">
+        <abbr title="ChiTiet">
+            <img src="/images/@item.image_url" style="width: 300px; height: 300px; object-fit: cover;" alt="Image" />
+
+        </abbr>
+    </a>
+
+                            </text>),
+grid.Column("",format:@<text>
+                                <h2 class="item-name">@item.name</h2>
+                                <div style="font-size:14px" class="item-details">Thể loại: @item.THELOAI.tenTheLoai</div>
+                                <div class="item-details">Giá: @item.gia vnd</div>
+
+
+</text>),
+grid.Column("",format:@<text>
+    <div style="margin-left: 10px;">
+        @if(tudong.Models.PLV.role!=null){
+                    if (tudong.Models.PLV.ListMaMuaBF.Contains(item.idGame))
+                {
+        <button class="gamer-button">Play</button>
+                }
+                else if (tudong.Models.PLV.idgame.Contains("" + item.idGame))
+                {
+        <h5>Giỏ hàng</h5>
+                }
+                else
+                {
+        <button onclick="thongBaDaThem()" class="gamer-button">
+            <p>
+                @Html.ActionLink("Mua", "AddCart", "GAMEs", new { idgame = item.idGame, gia = item.gia }, new { @class = "a" })
+            </p>
+        </button>
+                }
+                }
+
+    </div>
+</text>),
+
+}
+)
+        </div>}
+    else
+    {
+        <div id="gridContent" style="text-align:center">
+            @grid.GetHtml(
+                         tableStyle: "table table-bordered table-hover",
+                             footerStyle: "grid-footer",
+                             fillEmptyRows: true,
+
+                             mode: WebGridPagerModes.Numeric,
+                             alternatingRowStyle: "alternatingRowStyle",
+                               columns: new[] {
+
+                        grid.Column("",format:@<text>
+    <a href="@Url.Action("Details",
+                        new { id = item.idGame})" class="edit-btn">
+        <abbr title="ChiTiet">
+            <img src="/images/@item.image_url" style="object-fit:cover; width:400px; height:300px;" />
+        </abbr>
+    </a>
+
+                        </text>),
+grid.Column("",format:@<text>
+                            <h2 class="item-name">@item.name</h2>
+                            <div class="item-details">Thể loại: @item.THELOAI.tenTheLoai</div>
+                            <div class="item-details">Giá: @item.gia vnd</div>
+
+
+</text>),
+grid.Column("",format:@<text>
+    <div style="margin-left: 10px;">
+        @if(tudong.Models.PLV.role!=null){
+                    if (tudong.Models.PLV.ListMaMuaBF.Contains(item.idGame))
+                {
+        <button class="gamer-button">Play</button>
+                }
+                else if (tudong.Models.PLV.idgame.Contains("" + item.idGame))
+                {
+        <h5>Giỏ hàng</h5>
+                }
+                else
+                {
+        <button onclick="thongBaDaThem()" class="gamer-button">
+            <p>
+                @Html.ActionLink("Mua", "AddCart", "GAMEs", new { idgame = item.idGame, gia = item.gia }, new { @class = "a" })
+            </p>
+        </button>
+
+                }
+                }
+
+    </div>
+</text>),
+
+}
+)
+        </div>
+    }
+
+
+}

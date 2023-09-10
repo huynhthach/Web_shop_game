@@ -1,0 +1,51 @@
+﻿@model tudong.Models.CHITIET_MUAGAME
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>CHITIET_MUAGAME</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.discount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.discount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.gia)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.gia)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GAME.name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GAME.name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.MUAGAME.trangThai)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.MUAGAME.trangThai)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.idChiTIet }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,88 @@
+﻿@model IEnumerable<tudong.Models.GAME>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<script>
+    function thongBaoTonTai() {
+        alert("Trò chơi đã có trong giỏ hàng của bạn");
+
+    }
+    function thongBaoThemTC() {
+        alert("Bạn đã thêm vào giỏ hàng!");
+
+    }
+</script>
+<style>
+    .container{
+        min-height:600px;
+    }
+</style>
+<div class="container">
+
+    <h1 style=" margin-top:30px;font-family:'Bell MT';center;color:darkslategray;font-weight:bold;font-size:50px; text-align:center">GIỎ HÀNG CỦA BẠN</h1>
+    <style>
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 16px;
+            text-align: center;
+            text-decoration: none;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .box {
+            border: 1px solid #ccc;
+            padding: 10px;
+            margin-bottom: 40px;
+            display: block;
+            align-items: center;
+        }
+    </style>
+
+    @if (tudong.Models.PLV.idgame.Count == 1)
+    {
+        <h2 style="text-align:center;color:red; margin-left:20px">Chưa có game nào được thêm vào</h2>
+    }
+    @foreach (var item in Model)
+    {
+        if (tudong.Models.PLV.idgame.Contains(item.idGame))
+        {
+
+            <div class="box" style="display: flex; align-items: center; background-color: #333; padding: 10px; border-radius: 5px; witdh: 20%">
+                <div style="flex-grow: 0; width: 10%;">
+                    <img src="~/Images/@item.image_url" alt="Ảnh" style="width: 100%; aspect-ratio: 1/1; object-fit: cover; border-radius: 5px;">
+                </div>
+                <div style="flex-grow: 1;">
+                    <div style="margin-left: 10px; font-size: 18px; font-weight: bold; color: #fff; text-shadow: 1px 1px 2px #000;">@Html.DisplayFor(modelItem => item.name)</div>
+                    <div style="margin-left: 10px; color: #fff; font-weight: bold;">@Html.DisplayFor(modelItem => item.gia)</div>
+                </div>
+                <button onlcick="thongBaDaThem()">
+                    <p>@Html.ActionLink("Xóa khỏi giỏ hàng", "RemoveCart", "GAMEs", new { idgame = item.idGame, gia = item.gia }, new { @class = "a" });</p>
+
+                </button>
+            </div>
+        }
+    }
+    <h2 style="margin-left:20px">Số dư : @ViewBag.soDu đồng</h2>
+    <h2 style="margin-left:20px">Tông tiền là : @tudong.Models.PLV.tongTien đồng</h2>
+    @if (ViewBag.sodu > tudong.Models.PLV.tongTien)
+    {
+        if (tudong.Models.PLV.idgame.Count() > 1)
+        {
+            <p>@Html.ActionLink("Thanh toán", "DuaHoaDonCSDL", "GAMEs", new { @class = "button" });</p>
+        }
+    }
+    else
+    {
+        <h1>Không đủ tiền</h1>
+    }
+
+    </table>
+
+</div>

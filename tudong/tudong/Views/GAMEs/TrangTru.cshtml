@@ -1,0 +1,90 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<div class="banner_section layout_padding">
+    <div class="container">
+        <div id="my_slider" class="carousel slide" data-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h1 class="video_text">NEWS</h1>
+                            <h1 class="controller_text">RESIDENT EVIL 4</h1>
+                            <p class="banner_text">There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable</p>
+
+                            <div class="shop_bt"><a href="@Url.Action("Details", new { id = "G005" })">Chi tiết</a></div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="image_1">
+                                <img src="~/images/residentevil.jpg" width="800" height="500">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h1 class="video_text">UPDATE</h1>
+                            <h1 class="controller_text">MINECRAFT 1.7.8</h1>
+                            <p class="banner_text">There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable</p>
+                            <div class="shop_bt"><a href="@Url.Action("Details", new { id = "G001" })">CHI TIẾT</a></div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="image_1"><img src="~/images/anhtemp.jpg" width="400" height="200"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h1 class="video_text">TOP</h1>
+                            <h1 class="controller_text">GAME OF THE YEAR</h1>
+                            <p class="banner_text">There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable</p>
+                            <div class="shop_bt"><a href="#">@Html.ActionLink("SHOP NOW", "Index", "GAMEs", new { theLoai = "no" }, new { @class = "" })</a></div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="image_1"><img src="~/images/homepage.jpg"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <a class="carousel-control-prev" href="#my_slider" role="button" data-slide="prev">
+                <i class="fa fa-angle-left"></i>
+            </a>
+            <a class="carousel-control-next" href="#my_slider" role="button" data-slide="next">
+                <i class="fa fa-angle-right"></i>
+            </a>
+        </div>
+    </div>
+</div>
+<div class="about_section layout_padding">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="image_2"><img src="~/images/gta.jpg" height="400px"></div>
+            </div>
+            <div style="margin-top:300px" class="col-md-6">
+                <h1 class="about_text">TRIOLYGY</h1>
+                <p class="lorem_text">There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable</p>
+                <div class="shop_bt_2"><a href="">@Html.ActionLink("GAME", "Index", "GAMEs", new { theLoai = "no" }, new { @class = "" })</a></div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="video_section layout_padding">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <h1 class="video_text_2">3d video game</h1>
+                <h1 class="controller_text_2">remoto control</h1>
+                <p class="banner_text_2">Sự thịnh hành của VR và 3D GAME ở thời điểm hiện tại cũng như tương lai tới, metavers</p>
+               
+            </div>
+            <div class="col-md-6">
+                <div class="image_4"><img src="~/images/img-4.png"></div>
+            </div>
+        </div>
+    </div>
+</div>

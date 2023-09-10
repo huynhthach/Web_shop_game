@@ -1,0 +1,23 @@
+﻿@model tudong.Models.RegisterViewModel
+@{
+    ViewBag.Title = "Register";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<link rel="stylesheet" href="@Url.Content("~/Content/RegisterStyle.css")" />
+<main aria-labelledby="title">
+    <h2 id="title">Đăng ký</h2>
+    <div class="form-container">
+        @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { role = "form" }))
+        {
+            @Html.AntiForgeryToken()
+            @Html.ValidationSummary("", new { @class = "text-danger" })
+            <label for="Email">Email:</label>
+            @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+            <label for="Password">Password:</label>
+            @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+            <label for="ConfirmPassword">Confirm Password:</label>
+            @Html.PasswordFor(m => m.ConfirmPassword, new { @class = "form-control" })
+            <input type="submit" value="Register" />
+        }
+    </div>
+</main>

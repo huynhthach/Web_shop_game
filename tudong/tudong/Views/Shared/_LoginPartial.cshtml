@@ -1,0 +1,22 @@
+﻿@using Microsoft.AspNet.Identity
+@if (tudong.Models.PLV.role!=null)
+{
+    { 
+
+        <ul class="navbar-nav navbar-right">
+            <li style="list-style:none;margin-right:10px;">
+                HELLO @tudong.Models.PLV.Name 
+            </li>
+            <li style="list-style:none"><a class="nav-link" href="@Url.Action("Login", "USERs")">Log off</a></li>
+            
+        </ul>
+    }
+}
+@if (tudong.Models.PLV.role == null)
+{
+    <div class="navbar-nav navbar-right">
+        <button onclick="location.href='@Url.Action("Create", "USERs")'" id="registerLink" class="nav-link">Register</button>
+        <button onclick="location.href='@Url.Action("Login", "USERs")'" id="loginLink" class="nav-link">Log in</button>
+    </div>
+
+}

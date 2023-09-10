@@ -1,0 +1,63 @@
+﻿@model tudong.Models.MUAGAME
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>MUAGAME</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.idMua)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.idMua)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.idND)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.idND)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.Deleted)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Deleted)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.trangThai)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.trangThai)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ngayMua)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ngayMua)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.USER.email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.USER.email)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.idMua }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

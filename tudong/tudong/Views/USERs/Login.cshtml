@@ -1,0 +1,46 @@
+﻿@model tudong.Models.LoginVM
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+}
+<link rel="stylesheet" href="@Url.Content("~/Content/Login.css")" />
+<style>
+    .{
+       
+    }
+</style>
+@using (Html.BeginForm("Login", "USERs", FormMethod.Post))
+{   
+    
+    <div class="login-container">
+        <div class="form-container">
+            <h2>Login</h2>
+            <div>
+                <label for="Username">Tên đăng nhập:</label>
+                @Html.TextBoxFor(m => m.Username, new { id = "Username" })
+                @Html.ValidationMessageFor(m => m.Username)
+            </div>
+            <div>
+                <label for="Password">Mật khẩu:</label>
+                @Html.PasswordFor(m => m.Password, new { id = "Password" })
+                @Html.ValidationMessageFor(m => m.Password)
+            </div>
+            <div>
+                <input type="submit" value="Đăng nhập" />
+            </div>
+        </div>
+    </div>
+}
+
+@if (!ViewData.ModelState.IsValid)
+{
+    <div class="error-summary">
+        <p class="error-message">Đã xảy ra lỗi:</p>
+        <ul>
+            @foreach (var error in ViewData.ModelState.Values.SelectMany(v => v.Errors))
+            {
+                <li>@error.ErrorMessage</li>
+            }
+        </ul>
+    </div>
+}

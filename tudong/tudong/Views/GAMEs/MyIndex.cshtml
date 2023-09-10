@@ -1,0 +1,183 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutAdmin.cshtml";
+    var grid = new WebGrid(Model, canPage: true, defaultSort: "", rowsPerPage: 4);
+
+}
+<script>
+    function thongBaoDaThem() {
+        alert("Thêm thành công!");
+    }
+</script>
+
+@if (tudong.Models.PLV.role == "2" || tudong.Models.PLV.role == "1")
+{<button class="gamer-button">
+        @Html.ActionLink("Publish Your Game", "Create")
+    </button>
+
+}
+
+<style>
+    .fixed-image {
+        width: 400px;
+        height: 400px;
+        object-fit: cover;
+        border: 2px solid slategray; /* Màu và kích thước border */
+        border-radius: 10px; /* Bán kính làm tròn các góc */
+    }
+    .div-container {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+        .div-container > div {
+            padding-right: 50px;
+            width: 33.33%; /* Đảm bảo mỗi div chiếm 1/3 phần tử trên hàng */
+            box-sizing: border-box; /* Đảm bảo padding không làm thay đổi kích thước */
+        }
+
+    .button-container {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+    }
+
+    .button-container {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+    }
+
+        .button-container button {
+            margin: 0 10px;
+            padding: 10px 20px;
+            background-color: #f1f1f1;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 25px;
+            font-weight: bolder; /* Điều chỉnh kích thước chữ */
+        }
+
+            .button-container button:hover {
+                background-color: darkslategray
+            }
+
+                .button-container button:hover a {
+                    color: aliceblue;
+                }
+
+            .button-container button a {
+                text-decoration: none;
+                color: #333;
+            }
+
+    .gamer-button {
+        background-color: cadetblue;
+        color: #fff;
+        border: none;
+        padding: 10px 20px;
+        font-size: 16px;
+        font-weight: bold;
+        text-transform: uppercase;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        border-radius: 5px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .gridContent image {
+        width: 200px;
+        height: 200px;
+    }
+
+    .gamer-button:hover {
+        background-color: lightblue;
+        color: darkblue;
+    }
+
+    .gamer-button:active {
+        background-color: honeydew;
+    }
+
+    .gamer-button p {
+        margin: 0;
+    }
+
+    .gamer-button:focus {
+        outline: none;
+    }
+
+    .gamer-button::after {
+        content: url('path/to/gamer-icon.png');
+        display: inline-block;
+        margin-left: 10px;
+        vertical-align: middle;
+    }
+
+    .gamer-button::before {
+        content: url('path/to/gamer-sound.mp3');
+        display: none;
+    }
+
+    .item-name {
+        color: slategray;
+        font-size: 34px;
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+
+    .item-details {
+        color: #666;
+        font-size: 16px;
+        margin-bottom: 5px;
+    }
+
+    .container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 10px;
+    }
+
+        .container input[type="text"] {
+            width: 700px;
+            height: 40px;
+            padding: 5px;
+            font-size: 16px;
+        }
+
+        .container input[type="submit"] {
+            width: 150px;
+            height: 40px;
+            font-size: 16px;
+            background-color: darkslategrey;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+</style>
+<h1 style="text-align:center;color:darkslategray;font-weight:bold;font-size:50px;">GLARRY</h1>
+@using (Html.BeginForm())
+{
+    <div class="div-container" style="margin-left:50px; justify-content:center;">
+        @foreach (var item in Model)
+        {
+            if (tudong.Models.PLV.ListMaMuaBF.Contains(item.idGame))
+            {
+                <div style="margin-top:25px;margin-bottom:25px;">
+                    <a href="@Url.Action("", new { id = item.idGame })" class="">
+                        <abbr title="ChiTiet">
+                            <img src="/images/@item.image_url" class="fixed-image" alt="Image" />                        </abbr>
+                    </a>
+                    <button style="margin:0 auto; align-self: center; margin-top: 10px" class="gamer-button">Lanch</button>
+                </div>
+            }
+        }
+    </div>
+
+
+
+}

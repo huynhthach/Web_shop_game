@@ -1,0 +1,331 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="QLCuaHangGameModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="CHITIET_MUAGAME">
+    <Key>
+      <PropertyRef Name="idChiTIet" />
+    </Key>
+    <Property Name="idChiTIet" Type="int" Nullable="false" />
+    <Property Name="idGame" Type="varchar" MaxLength="10" />
+    <Property Name="idMua" Type="varchar" MaxLength="10" />
+    <Property Name="discount" Type="int" />
+    <Property Name="gia" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="GAME">
+    <Key>
+      <PropertyRef Name="idGame" />
+    </Key>
+    <Property Name="idGame" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="moTa" Type="nvarchar" MaxLength="200" Nullable="false" />
+    <Property Name="gia" Type="int" Nullable="false" />
+    <Property Name="idNPH" Type="int" />
+    <Property Name="idTheLoai" Type="varchar" MaxLength="10" />
+    <Property Name="image_url" Type="nvarchar" MaxLength="200" />
+    <Property Name="ngayTao" Type="date" />
+    <Property Name="giamGia" Type="int" />
+  </EntityType>
+  <EntityType Name="IDROLE">
+    <Key>
+      <PropertyRef Name="idRole" />
+    </Key>
+    <Property Name="idRole" Type="int" Nullable="false" />
+    <Property Name="ten" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="MUAGAME">
+    <Key>
+      <PropertyRef Name="idMua" />
+    </Key>
+    <Property Name="idMua" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="idND" Type="int" />
+    <Property Name="Deleted" Type="bit" />
+    <Property Name="trangThai" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="ngayMua" Type="date" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6013: The table/view 'QLCuaHangGame.dbo.SOHUU' does not have a primary key defined and no valid primary key could be inferred. This table/view has been excluded. To use the entity, you will need to review your schema, add the correct keys, and uncomment it.
+        <EntityType Name="SOHUU">
+          <Property Name="idND" Type="int" />
+          <Property Name="idGame" Type="varchar" MaxLength="10" />
+          <Property Name="NgaySoHuu" Type="date" />
+        </EntityType>-->
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="THELOAI">
+    <Key>
+      <PropertyRef Name="idTheLoai" />
+    </Key>
+    <Property Name="idTheLoai" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="tenTheLoai" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="TinTuc">
+    <Key>
+      <PropertyRef Name="idtintuc" />
+    </Key>
+    <Property Name="idtintuc" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="tieu_de" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="noi_dung" Type="text" Nullable="false" />
+    <Property Name="ngay_dang" Type="date" Nullable="false" />
+  </EntityType>
+  <EntityType Name="USERS">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" Nullable="false" />
+    <Property Name="email" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="tentaikhoan" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="matKhau" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="sdt" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="idRole" Type="int" />
+    <Property Name="ngaySinh" Type="datetime" />
+    <Property Name="FuName" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="Avartar" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="sodu" Type="int" />
+  </EntityType>
+  <Association Name="FK__CHITIET_M__idGam__45F365D3">
+    <End Role="GAME" Type="Self.GAME" Multiplicity="0..1" />
+    <End Role="CHITIET_MUAGAME" Type="Self.CHITIET_MUAGAME" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GAME">
+        <PropertyRef Name="idGame" />
+      </Principal>
+      <Dependent Role="CHITIET_MUAGAME">
+        <PropertyRef Name="idGame" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__CHITIET_M__idMua__46E78A0C">
+    <End Role="MUAGAME" Type="Self.MUAGAME" Multiplicity="0..1" />
+    <End Role="CHITIET_MUAGAME" Type="Self.CHITIET_MUAGAME" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MUAGAME">
+        <PropertyRef Name="idMua" />
+      </Principal>
+      <Dependent Role="CHITIET_MUAGAME">
+        <PropertyRef Name="idMua" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__GAME__idNPH__3E52440B">
+    <End Role="USERS" Type="Self.USERS" Multiplicity="0..1" />
+    <End Role="GAME" Type="Self.GAME" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="USERS">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="GAME">
+        <PropertyRef Name="idNPH" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__GAME__idTheLoai__3F466844">
+    <End Role="THELOAI" Type="Self.THELOAI" Multiplicity="0..1" />
+    <End Role="GAME" Type="Self.GAME" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="THELOAI">
+        <PropertyRef Name="idTheLoai" />
+      </Principal>
+      <Dependent Role="GAME">
+        <PropertyRef Name="idTheLoai" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK__MUAGAME__idND__4222D4EF">
+    <End Role="USERS" Type="Self.USERS" Multiplicity="0..1" />
+    <End Role="MUAGAME" Type="Self.MUAGAME" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="USERS">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="MUAGAME">
+        <PropertyRef Name="idND" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <!--Errors Found During Generation:
+error 6004: The table 'QLCuaHangGame.dbo.SOHUU' is referenced by a relationship, but cannot be found.
+        <Association Name="FK__SOHUU__idGame__4BAC3F29" />-->
+  <!--Errors Found During Generation:
+error 6004: The table 'QLCuaHangGame.dbo.SOHUU' is referenced by a relationship, but cannot be found.
+        <Association Name="FK__SOHUU__idND__4AB81AF0" />-->
+  <Association Name="FK__USERS__idRole__398D8EEE">
+    <End Role="IDROLE" Type="Self.IDROLE" Multiplicity="0..1" />
+    <End Role="USERS" Type="Self.USERS" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="IDROLE">
+        <PropertyRef Name="idRole" />
+      </Principal>
+      <Dependent Role="USERS">
+        <PropertyRef Name="idRole" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CHITIET_MUAGAME_GAME">
+    <End Role="GAME" Type="Self.GAME" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="CHITIET_MUAGAME" Type="Self.CHITIET_MUAGAME" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="GAME">
+        <PropertyRef Name="idGame" />
+      </Principal>
+      <Dependent Role="CHITIET_MUAGAME">
+        <PropertyRef Name="idGame" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_CHITIET_MUAGAME_MUAGAME">
+    <End Role="MUAGAME" Type="Self.MUAGAME" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="CHITIET_MUAGAME" Type="Self.CHITIET_MUAGAME" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="MUAGAME">
+        <PropertyRef Name="idMua" />
+      </Principal>
+      <Dependent Role="CHITIET_MUAGAME">
+        <PropertyRef Name="idMua" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_GAME_THELOAI">
+    <End Role="THELOAI" Type="Self.THELOAI" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="GAME" Type="Self.GAME" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="THELOAI">
+        <PropertyRef Name="idTheLoai" />
+      </Principal>
+      <Dependent Role="GAME">
+        <PropertyRef Name="idTheLoai" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_MUAGAME_USERS">
+    <End Role="USERS" Type="Self.USERS" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="MUAGAME" Type="Self.MUAGAME" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="USERS">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="MUAGAME">
+        <PropertyRef Name="idND" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <!--Errors Found During Generation:
+error 6004: The table 'QLCuaHangGame.dbo.SOHUU' is referenced by a relationship, but cannot be found.
+        <Association Name="FK_SOHUU_GAME" />-->
+  <!--Errors Found During Generation:
+error 6004: The table 'QLCuaHangGame.dbo.SOHUU' is referenced by a relationship, but cannot be found.
+        <Association Name="FK_SOHUU_USERS" />-->
+  <Association Name="FK_USERS_IDROLE">
+    <End Role="IDROLE" Type="Self.IDROLE" Multiplicity="0..1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="USERS" Type="Self.USERS" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="IDROLE">
+        <PropertyRef Name="idRole" />
+      </Principal>
+      <Dependent Role="USERS">
+        <PropertyRef Name="idRole" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="fn_diagramobjects" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="true" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" ReturnType="int" />
+  <Function Name="sp_alterdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="version" Type="int" Mode="In" />
+    <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+  </Function>
+  <Function Name="sp_creatediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="version" Type="int" Mode="In" />
+    <Parameter Name="definition" Type="varbinary(max)" Mode="In" />
+  </Function>
+  <Function Name="sp_dropdiagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_helpdiagramdefinition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_helpdiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+  </Function>
+  <Function Name="sp_renamediagram" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="diagramname" Type="nvarchar" Mode="In" />
+    <Parameter Name="owner_id" Type="int" Mode="In" />
+    <Parameter Name="new_diagramname" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="sp_upgraddiagrams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <EntityContainer Name="QLCuaHangGameModelStoreContainer">
+    <EntitySet Name="CHITIET_MUAGAME" EntityType="Self.CHITIET_MUAGAME" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="GAME" EntityType="Self.GAME" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="IDROLE" EntityType="Self.IDROLE" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="MUAGAME" EntityType="Self.MUAGAME" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="THELOAI" EntityType="Self.THELOAI" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TinTuc" EntityType="Self.TinTuc" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="USERS" EntityType="Self.USERS" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK__CHITIET_M__idGam__45F365D3" Association="Self.FK__CHITIET_M__idGam__45F365D3">
+      <End Role="GAME" EntitySet="GAME" />
+      <End Role="CHITIET_MUAGAME" EntitySet="CHITIET_MUAGAME" />
+    </AssociationSet>
+    <AssociationSet Name="FK__CHITIET_M__idMua__46E78A0C" Association="Self.FK__CHITIET_M__idMua__46E78A0C">
+      <End Role="MUAGAME" EntitySet="MUAGAME" />
+      <End Role="CHITIET_MUAGAME" EntitySet="CHITIET_MUAGAME" />
+    </AssociationSet>
+    <AssociationSet Name="FK__GAME__idNPH__3E52440B" Association="Self.FK__GAME__idNPH__3E52440B">
+      <End Role="USERS" EntitySet="USERS" />
+      <End Role="GAME" EntitySet="GAME" />
+    </AssociationSet>
+    <AssociationSet Name="FK__GAME__idTheLoai__3F466844" Association="Self.FK__GAME__idTheLoai__3F466844">
+      <End Role="THELOAI" EntitySet="THELOAI" />
+      <End Role="GAME" EntitySet="GAME" />
+    </AssociationSet>
+    <AssociationSet Name="FK__MUAGAME__idND__4222D4EF" Association="Self.FK__MUAGAME__idND__4222D4EF">
+      <End Role="USERS" EntitySet="USERS" />
+      <End Role="MUAGAME" EntitySet="MUAGAME" />
+    </AssociationSet>
+    <AssociationSet Name="FK__USERS__idRole__398D8EEE" Association="Self.FK__USERS__idRole__398D8EEE">
+      <End Role="IDROLE" EntitySet="IDROLE" />
+      <End Role="USERS" EntitySet="USERS" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CHITIET_MUAGAME_GAME" Association="Self.FK_CHITIET_MUAGAME_GAME">
+      <End Role="GAME" EntitySet="GAME" />
+      <End Role="CHITIET_MUAGAME" EntitySet="CHITIET_MUAGAME" />
+    </AssociationSet>
+    <AssociationSet Name="FK_CHITIET_MUAGAME_MUAGAME" Association="Self.FK_CHITIET_MUAGAME_MUAGAME">
+      <End Role="MUAGAME" EntitySet="MUAGAME" />
+      <End Role="CHITIET_MUAGAME" EntitySet="CHITIET_MUAGAME" />
+    </AssociationSet>
+    <AssociationSet Name="FK_GAME_THELOAI" Association="Self.FK_GAME_THELOAI">
+      <End Role="THELOAI" EntitySet="THELOAI" />
+      <End Role="GAME" EntitySet="GAME" />
+    </AssociationSet>
+    <AssociationSet Name="FK_MUAGAME_USERS" Association="Self.FK_MUAGAME_USERS">
+      <End Role="USERS" EntitySet="USERS" />
+      <End Role="MUAGAME" EntitySet="MUAGAME" />
+    </AssociationSet>
+    <AssociationSet Name="FK_USERS_IDROLE" Association="Self.FK_USERS_IDROLE">
+      <End Role="IDROLE" EntitySet="IDROLE" />
+      <End Role="USERS" EntitySet="USERS" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
